@@ -37,3 +37,27 @@ about sewer back up problem, both the weather dataset and cityline dataset shoul
 9. Rename both the 'DATE' column of weather dataset and 'close_d2' column of
  cityline dataset into a same name, df_merge. To do so, set the weather data
  frame to pandas.DataFrame.rename method as follow: 'dfw = dfw.rename(columns={"DATE": "df_merge"})'. Apply the same method to 'close_d2'  column of cityline dataset to rename it into df_merge as well.
+
+ 10. do a left merge  and store the result of the merge into dfm.  To do so, set dfc as left dataset, dfw as right dataset and use df_merge as key to merge both
+datasets, also set the 'validate' to 'm:1' and 'indicator' to 'True.
+
+
+ 11. # Now, from merged dataset (dfm), We create some indicator variables
+that show extreme weather.  Suppose that if Average Daily Wind Speed('AWND')
+is greater than 10 miles per hour, it is considered as extreme weather. Create
+ new column called ['EX_wIND] and set to ['AWND'] column, greater than 10 and apply astype() method to it with argument 'int' that return the result as integer number.
+
+
+ 12. If snow dept ['SNWD'] is greater than 4 inches, it is extreme weather. Create new column called ['EX_SNWD'] and set it to ['SNWD'] column, also apply astype  method with 'int' argument to it.
+
+ 13. If maximum temperature ['TMAX'] is greater than 90, it is extreme weather. Create new column called ['EX_TMAX'] and set it to ['TMAX'] column, also apply astype  method with 'int' argument to it.
+
+ 14. If maximum temperature ['TMIN'] is smaller than 0, it is extreme weather. Create new column called ['EX_TMIN'] and set it to ['TMIN'] column, also apply astype method with 'int' argument to it.
+
+ 15. Create a new column called 'EX_SUM' which is the result of concatenation of
+all extreme variables
+
+16. To examine the correlation between extreme variables and 'total_days' column
+which  is the lenght of time to address a complaint about sewer back up problem, create a subset of dfm (merged dataset) that just contain extreme variables and 'total-days'. Call the subset of dfm, dfm2.
+
+17. Now, apply  pandas.DataFrame.corr method to dfc2 and print it. 
