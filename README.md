@@ -17,3 +17,15 @@ Two datasets have been used in this project: the first one is 'Cityline_Call_for
 
 3. Since the cityline dataset is a large dataset and contain different type
 of complaints, we need to keep  the dataset just for 'Sewer Back up' complaint and drop all other rows except the rows that contain sewer back up complaint. To do so, from the  'complaint_type_name' field,  use  pandas DataFrame.loc and str.contains() methods ('dfc.loc[dfc['complaint_type_name'].str.contains('Sew'), 'Sewer']=1' ) and drop all other rows that doesn't contains sewer back up complaint.
+
+4. To extract the time length  between open_date and close_date of complaints (the difference between open_date and close_date atributes of the dataset tell us how long does it take for Department ofPublic Work to fix the  'Sewer Back up' problem), the date's columns (open_date and close-date)  should be parsed based on Year/Month/Day by using regular expression for digit  character (|d). To do so,  we need to create new columns for each of them as the following:
+'dfc['open_d2'] = dfc['open_date'].str.extract('(\d\d\d\d-\d\d-\d\d)', expand=True)' create 'close_d2' column for close_date using the same method.
+
+5. Convert ['open_d2'] and ['close_d2'] columns into unified date format
+by using pandas.to_datetime method. To do so,  set the 'open_d2' column of
+dfc(cityline dataframe) to pandas.to_datetime method and 'open_d2' column of
+dfc as its argument. Apply the same method to 'close_d2' column as well.
+
+6. Create a new column, 'total_days', and set it to the difference  between 'close_d2' and 'open_d2' columns. Again, the 'total_days' column tell us how many days it takes Department of Public Work (DPW) to address the sewer back up problem.
+
+7. Use pandas to read the  CSV file, 'Daily_Weather_Syracuse_17to19.csv', and store it into the variable 'dfw'.
