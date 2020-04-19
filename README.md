@@ -29,3 +29,11 @@ dfc as its argument. Apply the same method to 'close_d2' column as well.
 6. Create a new column, 'total_days', and set it to the difference  between 'close_d2' and 'open_d2' columns. Again, the 'total_days' column tell us how many days it takes Department of Public Work (DPW) to address the sewer back up problem.
 
 7. Use pandas to read the  CSV file, 'Daily_Weather_Syracuse_17to19.csv', and store it into the variable 'dfw'.
+
+8. To examine the impact of extreme weather on the time to address a complaint
+about sewer back up problem, both the weather dataset and cityline dataset should should be merged. To do so, the only column that they can be merged is date's columns. Therefore, we need to convert the 'DATE' column of weather dataset  into a similar date format with 'close_d2' column of cityline dataset by applying pd.to_datetime to it. This step is similar to step 5.
+
+
+9. Rename both the 'DATE' column of weather dataset and 'close_d2' column of
+ cityline dataset into a same name, df_merge. To do so, set the weather data
+ frame to pandas.DataFrame.rename method as follow: 'dfw = dfw.rename(columns={"DATE": "df_merge"})'. Apply the same method to 'close_d2'  column of cityline dataset to rename it into df_merge as well.
