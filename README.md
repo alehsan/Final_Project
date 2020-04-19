@@ -7,3 +7,13 @@ This project provides an analysis and evaluation of the impact of extreme weathe
 #Input data
 
 Two datasets have been used in this project: the first one is 'Cityline_Call_for_Services' (Published on October 29, 2019) that is publicly available in Syracuse Open Source data's website(http://data.syrgov.net/datasets/0aa5fcd76dbd4f2cabf2aeb1ddd0179e_0/data), and the second dataset is weather dataset 'Daily_Weather_Syracuse_17to19.csv' which is available in NCEI website (https://www.ncdc.noaa.gov/cdo-web/search).
+
+# Instruction:
+
+
+1. Import the following modules: 're', 'pandas', 'numpy', 'from datetime import  datetime'.
+
+2. Use pandas to read the  CSV file, 'Cityline_Calls_for_Service.csv', and store it into the variable 'dfc'.
+
+3. Since the cityline dataset is a large dataset and contain different type
+of complaints, we need to keep  the dataset just for 'Sewer Back up' complaint and drop all other rows except the rows that contain sewer back up complaint. To do so, from the  'complaint_type_name' field,  use  pandas DataFrame.loc and str.contains() methods ('dfc.loc[dfc['complaint_type_name'].str.contains('Sew'), 'Sewer']=1' ) and drop all other rows that doesn't contains sewer back up complaint.
