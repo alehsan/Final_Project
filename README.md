@@ -4,9 +4,10 @@ Advanced Policy Analysis -Final Project
 
 This project provides an analysis and evaluation of the impact of extreme weather on the time (The time between opening date and closing date of a complaint about **Sewer Back up** problem) to complete a 'Sewer Back up' problem in the City of Syracuse, New York.  The initial assumption is that the time to complete a sewer back up service request is delayed by extreme weather. In this Project, first I performed a data preparation process which include data cleaning, merging and  creating   new variables and dropping duplicates.  Second, after getting our final sample data ready, I tried to find the correlation between the completion time of request for sewer back up service (total_day) and extreme weather variables-if there is positive correlation between extreme weather's variables and completion time of addressing the sewer back up problem, means that the initial assumption is true  and extreme weather  delays the completion time of addressing sewer back up complaint. If the correlation is negative, means that the initial assumption is not true  and extreme weather in Syracuse doesn't delay the completion time of addressing sewer back up complaint.
 
-#Input data
+## Input data
 
-Two datasets have been used in this project: the first one is 'Cityline_Call_for_Services' (Published on October 29, 2019) that is publicly available in Syracuse Open Source data's website(http://data.syrgov.net/datasets/0aa5fcd76dbd4f2cabf2aeb1ddd0179e_0/data), and the second dataset is weather dataset 'Daily_Weather_Syracuse_17to19.csv' which is available in NCEI website (https://www.ncdc.noaa.gov/cdo-web/search).
+Two datasets have been used in this project: the first one is 'Cityline_Call_for_Services' (Published on October 29, 2019) that is publicly available in Syracuse Open Source data's website(http://data.syrgov.net/datasets/0aa5fcd76dbd4f2cabf2aeb1ddd0179e_0/data), and the second dataset is weather dataset 'Daily_Weather_Syracuse_17to19.csv' which is available in NCEI website (https://www.ncdc.noaa.gov/cdo-web/search). Both datasets contain data from 2017, 2018 and 2019.
+
 
 # Instruction:
 
@@ -38,11 +39,11 @@ about sewer back up problem, both the weather dataset and cityline dataset shoul
  cityline dataset into a same name, df_merge. To do so, set the weather data
  frame to pandas.DataFrame.rename method as follow: 'dfw = dfw.rename(columns={"DATE": "df_merge"})'. Apply the same method to 'close_d2'  column of cityline dataset to rename it into df_merge as well.
 
- 10. do a left merge  and store the result of the merge into dfm.  To do so, set dfc as left dataset, dfw as right dataset and use df_merge as key to merge both
+ 10.do a left merge  and store the result of the merge into dfm.  To do so, set dfc as left dataset, dfw as right dataset and use df_merge as key to merge both
 datasets, also set the 'validate' to 'm:1' and 'indicator' to 'True.
 
 
- 11. # Now, from merged dataset (dfm), We create some indicator variables
+ 11. Now, from merged dataset (dfm), We create some indicator variables
 that show extreme weather.  Suppose that if Average Daily Wind Speed('AWND')
 is greater than 10 miles per hour, it is considered as extreme weather. Create
  new column called ['EX_wIND] and set to ['AWND'] column, greater than 10 and apply astype() method to it with argument 'int' that return the result as integer number.
@@ -60,4 +61,4 @@ all extreme variables
 16. To examine the correlation between extreme variables and 'total_days' column
 which  is the lenght of time to address a complaint about sewer back up problem, create a subset of dfm (merged dataset) that just contain extreme variables and 'total-days'. Call the subset of dfm, dfm2.
 
-17. Now, apply  pandas.DataFrame.corr method to dfc2 and print it. 
+17. Now, apply  pandas.DataFrame.corr method to dfm2 and print it.
