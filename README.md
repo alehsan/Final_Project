@@ -1,12 +1,12 @@
-# Final_Project
-Advanced Policy Analysis -Final Project
+
 # Summary
 
-This project provides an analysis and evaluation of the impact of extreme weather on the time (The time between opening date and closing date of a complaint about **Sewer Back up** problem) to complete a 'Sewer Back up' problem in the City of Syracuse, New York.  The initial assumption is that the time to complete a sewer back up service request is delayed by extreme weather. In this Project, first I performed a data preparation process which include data cleaning, merging and  creating   new variables and dropping duplicates.  Second, after getting our final sample data ready, I tried to find the correlation between the completion time of request for sewer back up service (total_day) and extreme weather variables-if there is positive correlation between extreme weather's variables and completion time of addressing the sewer back up problem, means that the initial assumption is true  and extreme weather  delays the completion time of addressing sewer back up complaint. If the correlation is negative, means that the initial assumption is not true  and extreme weather in Syracuse doesn't delay the completion time of addressing sewer back up complaint.
+This project provides an analysis and evaluation of the impact of extreme weather on the time (The time between opening date and closing date of a complaint about **Sewer Back up** problem) to complete a 'Sewer Back up' problem in the City of Syracuse, New York.  The initial assumption is that the time to complete a sewer back up service request is delayed by extreme weather. In this Project, first I performed a data preparation process which include data cleaning, merging and  creating   new variables and dropping duplicates.  Second, after getting the final sample data ready, I tried to find the correlation between the completion time of request for sewer back up service (total_day) and extreme weather variables-if there is positive correlation between extreme weather's variables and completion time of addressing the sewer back up problem, means that the initial assumption is true  and extreme weather  delays the completion time of addressing sewer back up complaint. If the correlation is negative, means that the initial assumption is not true  and extreme weather in Syracuse doesn't delay the completion time of addressing sewer back up complaint. Finally, it should be
+mentioned that creating extreme variable is based on my personal assumption because there is no any specific definition or criteria for extreme weather.
 
 ## Input data
 
-Two datasets have been used in this project: the first one is 'Cityline_Call_for_Services' (Published on October 29, 2019) that is publicly available in Syracuse Open Source data's website(http://data.syrgov.net/datasets/0aa5fcd76dbd4f2cabf2aeb1ddd0179e_0/data), and the second dataset is weather dataset 'Daily_Weather_Syracuse_17to19.csv' which is available in NCEI website (https://www.ncdc.noaa.gov/cdo-web/search). Both datasets contain data from 2017, 2018 and 2019.
+Two datasets have been used in this study: the first one is 'Cityline_Call_for_Services' (Published on October 29, 2019) that is publicly available in Syracuse Open Source data's website(http://data.syrgov.net/datasets/0aa5fcd76dbd4f2cabf2aeb1ddd0179e_0/data). the cityline dataset has 2021 rows and 22 columns.  The second dataset is weather dataset 'Daily_Weather_Syracuse_17to19.csv' which is available in NCEI website (https://www.ncdc.noaa.gov/cdo-web/search). The dataset contain 911 rows and 25 columns.  Both datasets contain data from 2017, 2018 and 2019.
 
 
 # Instruction:
@@ -16,49 +16,53 @@ Two datasets have been used in this project: the first one is 'Cityline_Call_for
 
 2. Use pandas to read the  CSV file, 'Cityline_Calls_for_Service.csv', and store it into the variable 'dfc'.
 
-3. Since the cityline dataset is a large dataset and contain different type
+3. To get information about columns and rows of dataset, use pandas.DataFrame.shape  and pandas.Dataframe.info().
+To find the total number of complaint made for sewer back up problem, apply count() method to the 'complaint_type_name' column of cityline dataset.
+
+4. Since the cityline dataset is a large dataset and contain different type
 of complaints, we need to keep  the dataset just for 'Sewer Back up' complaint and drop all other rows except the rows that contain sewer back up complaint. To do so, from the  'complaint_type_name' field,  use  pandas DataFrame.loc and str.contains() methods ('dfc.loc[dfc['complaint_type_name'].str.contains('Sew'), 'Sewer']=1' ) and drop all other rows that doesn't contains sewer back up complaint.
 
-4. To extract the time length  between open_date and close_date of complaints (the difference between open_date and close_date atributes of the dataset tell us how long does it take for Department ofPublic Work to fix the  'Sewer Back up' problem), the date's columns (open_date and close-date)  should be parsed based on Year/Month/Day by using regular expression for digit  character (|d). To do so,  we need to create new columns for each of them as the following:
+5. To extract the time length  between open_date and close_date of complaints (the difference between open_date and close_date atributes of the dataset tell us how long does it take for Department ofPublic Work to fix the  'Sewer Back up' problem), the date's columns (open_date and close-date)  should be parsed based on Year/Month/Day by using regular expression for digit  character (|d). To do so,  we need to create new columns for each of them as the following:
 'dfc['open_d2'] = dfc['open_date'].str.extract('(\d\d\d\d-\d\d-\d\d)', expand=True)' create 'close_d2' column for close_date using the same method.
 
-5. Convert ['open_d2'] and ['close_d2'] columns into unified date format
+6. Convert ['open_d2'] and ['close_d2'] columns into unified date format
 by using pandas.to_datetime method. To do so,  set the 'open_d2' column of
 dfc(cityline dataframe) to pandas.to_datetime method and 'open_d2' column of
 dfc as its argument. Apply the same method to 'close_d2' column as well.
 
-6. Create a new column, 'total_days', and set it to the difference  between 'close_d2' and 'open_d2' columns. Again, the 'total_days' column tell us how many days it takes Department of Public Work (DPW) to address the sewer back up problem.
+7. Create a new column, 'total_days', and set it to the difference  between 'close_d2' and 'open_d2' columns. Again, the 'total_days' column tell us how many days it takes Department of Public Work (DPW) to address the sewer back up problem.
 
-7. Use pandas to read the  CSV file, 'Daily_Weather_Syracuse_17to19.csv', and store it into the variable 'dfw'.
+8. Use pandas to read the  CSV file, 'Daily_Weather_Syracuse_17to19.csv', and store it into the variable 'dfw'.
 
-8. To examine the impact of extreme weather on the time to address a complaint
+9. To examine the impact of extreme weather on the time to address a complaint
 about sewer back up problem, both the weather dataset and cityline dataset should should be merged. To do so, the only column that they can be merged is date's columns. Therefore, we need to convert the 'DATE' column of weather dataset  into a similar date format with 'close_d2' column of cityline dataset by applying pd.to_datetime to it. This step is similar to step 5.
 
 
-9. Rename both the 'DATE' column of weather dataset and 'close_d2' column of
+10. Rename both the 'DATE' column of weather dataset and 'close_d2' column of
  cityline dataset into a same name, df_merge. To do so, set the weather data
  frame to pandas.DataFrame.rename method as follow: 'dfw = dfw.rename(columns={"DATE": "df_merge"})'. Apply the same method to 'close_d2'  column of cityline dataset to rename it into df_merge as well.
 
- 10.do a left merge  and store the result of the merge into dfm.  To do so, set dfc as left dataset, dfw as right dataset and use df_merge as key to merge both
+11. do a left merge  and store the result of the merge into dfm.  To do so, set dfc as left dataset, dfw as right dataset and use df_merge as key to merge both
 datasets, also set the 'validate' to 'm:1' and 'indicator' to 'True.
 
+12. To find the average number of days that a 'sewer back up' complaint  is being addressed,apply the mean() method to 'total_days' comlum of merged dataset.
 
- 11. Now, from merged dataset (dfm), We create some indicator variables
+13. Now, from merged dataset (dfm), We create some indicator variables
 that show extreme weather.  Suppose that if Average Daily Wind Speed('AWND')
 is greater than 10 miles per hour, it is considered as extreme weather. Create
  new column called ['EX_wIND] and set to ['AWND'] column, greater than 10 and apply astype() method to it with argument 'int' that return the result as integer number.
 
 
- 12. If snow dept ['SNWD'] is greater than 4 inches, it is extreme weather. Create new column called ['EX_SNWD'] and set it to ['SNWD'] column, also apply astype  method with 'int' argument to it.
+ 14. If snow dept ['SNWD'] is greater than 4 inches, it is extreme weather. Create new column called ['EX_SNWD'] and set it to ['SNWD'] column, also apply astype  method with 'int' argument to it.
 
- 13. If maximum temperature ['TMAX'] is greater than 90, it is extreme weather. Create new column called ['EX_TMAX'] and set it to ['TMAX'] column, also apply astype  method with 'int' argument to it.
+ 15. If maximum temperature ['TMAX'] is greater than 90, it is extreme weather. Create new column called ['EX_TMAX'] and set it to ['TMAX'] column, also apply astype  method with 'int' argument to it.
 
- 14. If maximum temperature ['TMIN'] is smaller than 0, it is extreme weather. Create new column called ['EX_TMIN'] and set it to ['TMIN'] column, also apply astype method with 'int' argument to it.
+ 16. If maximum temperature ['TMIN'] is smaller than 0, it is extreme weather. Create new column called ['EX_TMIN'] and set it to ['TMIN'] column, also apply astype method with 'int' argument to it.
 
- 15. Create a new column called 'EX_SUM' which is the result of concatenation of
+ 17. Create a new column called 'EX_SUM' which is the result of concatenation of
 all extreme variables
 
-16. To examine the correlation between extreme variables and 'total_days' column
+18. To examine the correlation between extreme variables and 'total_days' column
 which  is the lenght of time to address a complaint about sewer back up problem, create a subset of dfm (merged dataset) that just contain extreme variables and 'total-days'. Call the subset of dfm, dfm2.
 
-17. Now, apply  pandas.DataFrame.corr method to dfm2 and print it.
+19. Now, apply  pandas.DataFrame.corr method to dfm2 and print it.
