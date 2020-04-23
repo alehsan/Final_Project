@@ -9,9 +9,9 @@ mentioned that creating extreme variable is based on my personal assumption beca
 Two datasets have been used in this study: the first one is 'Cityline_Call_for_Services' (Published on October 29, 2019) that is publicly available in Syracuse Open Source data's website(http://data.syrgov.net/datasets/0aa5fcd76dbd4f2cabf2aeb1ddd0179e_0/data). the cityline dataset has 2021 rows and 22 columns.  The second dataset is weather dataset 'Daily_Weather_Syracuse_17to19.csv' which is available in NCEI website (https://www.ncdc.noaa.gov/cdo-web/search). The dataset contain 911 rows and 25 columns.  Both datasets contain data from 2017, 2018 and 2019.
 
 ### Deliverables
-Three deliverable files include one README.md file that explain the project step by step, one relult.md file that briefly discuss on the findings and one python script  that is called 'final_project.py',  contains code used in this project.  The datasets used in this project also uploaded along  other deliverables. 
+Three deliverable files include one README.md file that explain the project step by step, one relult.md file that briefly discuss on the findings and one python script  that is called 'final_project.py',  contains code used in this project.  The datasets used in this project also uploaded along  other deliverables.
 
-# Instruction:
+#### Instruction:
 
 
 1. Import the following modules: 're', 'pandas', 'numpy',  and 'from datetime import  datetime'.
@@ -86,6 +86,7 @@ which  is the lenght of time to address a complaint about sewer back up problem,
 24. Now, apply  pandas.DataFrame.corr method to dfm2 and print it.
 
 
+### Related questions
 
 What is the correlation between extreme weather variables and the completion time of addressing sewer back up complaint ('total_days')? Does extreme  weather delay the completion time of fixing a sewer back up problem?
 
