@@ -12,7 +12,7 @@ Two datasets have been used in this study: the first one is 'Cityline_Call_for_S
 # Instruction:
 
 
-1. Import the following modules: 're', 'pandas', 'numpy', 'from datetime import  datetime'.
+1. Import the following modules: 're', 'pandas', 'numpy',  and 'from datetime import  datetime'.
 
 2. Use pandas to read the  CSV file, 'Cityline_Calls_for_Service.csv', and store it into the variable 'dfc'.
 
@@ -25,7 +25,7 @@ of complaints, we need to keep  the dataset just for 'Sewer Back up' complaint a
 
 6. To find the number of sewer back up complaints per zip code, use groupby
 mthod to 'zip' and 'complaint_type_name' columns as follows:
-**dfc2 = dfc.groupby('zip', as_index=False)['complaint_type_name'].count().copy()**
+dfc2 = dfc.groupby('zip', as_index=False)['complaint_type_name'].count().copy()
 
 7. To find which zip code has the highest number of complaints, use max()
  method to 'complaint_type_name' column of dfc2.
@@ -83,4 +83,18 @@ which  is the lenght of time to address a complaint about sewer back up problem,
 
 24. Now, apply  pandas.DataFrame.corr method to dfm2 and print it.
 
-What is the correlation between extreme weather variables and the completion time of addressing sewer back up complaint ('total_days').
+
+
+
+
+What is the correlation between extreme weather variables and the completion time of addressing sewer back up complaint ('total_days')? Does extreme  weather delay the completion time of fixing a sewer back up problem?
+
+Which zip code recoded the highest number of request for fixing sewer back up problem?
+
+Which zip code recoded the lowest request?
+
+Totally, how many complaints  about sewer back up problem recorded during three years?
+
+How many complaints recorded for each year?
+
+What is the average time that DPW can address a complaint?
