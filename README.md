@@ -22,47 +22,62 @@ To find the total number of complaint made for sewer back up problem, apply coun
 4. Since the cityline dataset is a large dataset and contain different type
 of complaints, we need to keep  the dataset just for 'Sewer Back up' complaint and drop all other rows except the rows that contain sewer back up complaint. To do so, from the  'complaint_type_name' field,  use  pandas DataFrame.loc and str.contains() methods ('dfc.loc[dfc['complaint_type_name'].str.contains('Sew'), 'Sewer']=1' ) and drop all other rows that doesn't contains sewer back up complaint.
 
-5. To extract the time length  between open_date and close_date of complaints (the difference between open_date and close_date atributes of the dataset tell us how long does it take for Department ofPublic Work to fix the  'Sewer Back up' problem), the date's columns (open_date and close-date)  should be parsed based on Year/Month/Day by using regular expression for digit  character (|d). To do so,  we need to create new columns for each of them as the following:
+5. To find the number of sewer back up complaints per zip code, use groupby
+mthod to 'zip' and 'complaint_type_name' columns as follows:
+**dfc2 = dfc.groupby('zip', as_index=False)['complaint_type_name'].count().copy()**
+
+6. To find which zip code has the highest number of complaints, use max()
+ method to 'complaint_type_name' column of dfc2.
+
+7.To find which zip code has the lowest number of complaints, use min() methods
+ to 'complaint_type_name' columns of dfc2
+
+8. Create the scatter plot of 'zip' and 'complaint_type_name' using dfc2 as Data
+fram To do so, set 'complaint_type_name' to y axis and 'zip' to x axis. The
+scatter plot will show the zip code with highest number of complaints and the
+zip code with lowest number of complaint as well.
+
+9. To extract the time length  between open_date and close_date of complaints (the difference between open_date and close_date atributes of the dataset tell us how long does it take for Department ofPublic Work to fix the  'Sewer Back up' problem), the date's columns (open_date and close-date)  should be parsed based on Year/Month/Day by using regular expression for digit  character (|d). To do so,  we need to create new columns for each of them as the following:
 'dfc['open_d2'] = dfc['open_date'].str.extract('(\d\d\d\d-\d\d-\d\d)', expand=True)' create 'close_d2' column for close_date using the same method.
 
-6. Convert ['open_d2'] and ['close_d2'] columns into unified date format
+10. Convert ['open_d2'] and ['close_d2'] columns into unified date format
 by using pandas.to_datetime method. To do so,  set the 'open_d2' column of
 dfc(cityline dataframe) to pandas.to_datetime method and 'open_d2' column of
 dfc as its argument. Apply the same method to 'close_d2' column as well.
 
-7. Create a new column, 'total_days', and set it to the difference  between 'close_d2' and 'open_d2' columns. Again, the 'total_days' column tell us how many days it takes Department of Public Work (DPW) to address the sewer back up problem.
+11. Create a new column, 'total_days', and set it to the difference  between 'close_d2' and 'open_d2' columns. Again, the 'total_days' column tell us how many days it takes Department of Public Work (DPW) to address the sewer back up problem.
 
-8. Use pandas to read the  CSV file, 'Daily_Weather_Syracuse_17to19.csv', and store it into the variable 'dfw'.
+12. Use pandas to read the  CSV file, 'Daily_Weather_Syracuse_17to19.csv', and store it into the variable 'dfw'.
 
-9. To examine the impact of extreme weather on the time to address a complaint
+13. To examine the impact of extreme weather on the time to address a complaint
 about sewer back up problem, both the weather dataset and cityline dataset should should be merged. To do so, the only column that they can be merged is date's columns. Therefore, we need to convert the 'DATE' column of weather dataset  into a similar date format with 'close_d2' column of cityline dataset by applying pd.to_datetime to it. This step is similar to step 5.
 
 
-10. Rename both the 'DATE' column of weather dataset and 'close_d2' column of
+14. Rename both the 'DATE' column of weather dataset and 'close_d2' column of
  cityline dataset into a same name, df_merge. To do so, set the weather data
  frame to pandas.DataFrame.rename method as follow: 'dfw = dfw.rename(columns={"DATE": "df_merge"})'. Apply the same method to 'close_d2'  column of cityline dataset to rename it into df_merge as well.
 
-11. do a left merge  and store the result of the merge into dfm.  To do so, set dfc as left dataset, dfw as right dataset and use df_merge as key to merge both
+15. do a left merge  and store the result of the merge into dfm.  To do so, set dfc as left dataset, dfw as right dataset and use df_merge as key to merge both
 datasets, also set the 'validate' to 'm:1' and 'indicator' to 'True.
 
-12. To find the average number of days that a 'sewer back up' complaint  is being addressed,apply the mean() method to 'total_days' comlum of merged dataset.
+16. To find the average number of days that a 'sewer back up' complaint  is being addressed,apply the mean() method to 'total_days' comlum of merged dataset.
 
-13. Now, from merged dataset (dfm), We create some indicator variables
+17. Now, from merged dataset (dfm), We create some indicator variables
 that show extreme weather.  Suppose that if Average Daily Wind Speed('AWND')
 is greater than 10 miles per hour, it is considered as extreme weather. Create
  new column called ['EX_wIND] and set to ['AWND'] column, greater than 10 and apply astype() method to it with argument 'int' that return the result as integer number.
 
 
- 14. If snow dept ['SNWD'] is greater than 4 inches, it is extreme weather. Create new column called ['EX_SNWD'] and set it to ['SNWD'] column, also apply astype  method with 'int' argument to it.
+ 18. If snow dept ['SNWD'] is greater than 4 inches, it is extreme weather. Create new column called ['EX_SNWD'] and set it to ['SNWD'] column, also apply astype  method with 'int' argument to it.
 
- 15. If maximum temperature ['TMAX'] is greater than 90, it is extreme weather. Create new column called ['EX_TMAX'] and set it to ['TMAX'] column, also apply astype  method with 'int' argument to it.
+ 19. If maximum temperature ['TMAX'] is greater than 90, it is extreme weather. Create new column called ['EX_TMAX'] and set it to ['TMAX'] column, also apply astype  method with 'int' argument to it.
 
- 16. If maximum temperature ['TMIN'] is smaller than 0, it is extreme weather. Create new column called ['EX_TMIN'] and set it to ['TMIN'] column, also apply astype method with 'int' argument to it.
+ 20. If maximum temperature ['TMIN'] is smaller than 0, it is extreme weather. Create new column called ['EX_TMIN'] and set it to ['TMIN'] column, also apply astype method with 'int' argument to it.
 
- 17. Create a new column called 'EX_SUM' which is the result of concatenation of
+ 21. Create a new column called 'EX_SUM' which is the result of concatenation of
 all extreme variables
 
-18. To examine the correlation between extreme variables and 'total_days' column
+22. To examine the correlation between extreme variables and 'total_days' column
 which  is the lenght of time to address a complaint about sewer back up problem, create a subset of dfm (merged dataset) that just contain extreme variables and 'total-days'. Call the subset of dfm, dfm2.
 
-19. Now, apply  pandas.DataFrame.corr method to dfm2 and print it.
+23. Now, apply  pandas.DataFrame.corr method to dfm2 and print it.
