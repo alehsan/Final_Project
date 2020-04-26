@@ -18,7 +18,7 @@ pd.set_option('display.max_columns', 50)
 
 #Step2.- Import Cityline Dataset
 
-dfc = pd.read_csv('Cityline_Calls_for_Service.csv')
+dfc = pd.read_csv('Cityline_calls_for_service.csv')
   
 
 #step3. 
@@ -83,7 +83,7 @@ dfc['total_days'] = dfc['close_d2'] -dfc['open_d2']
 
 #step 13
 
-dfw = pd.read_csv('Daily_Weather_Syracuse_17to19.csv')
+dfw = pd.read_csv('Weather.csv')
 
 
 #step 14. convert the merging key into same date format. 
@@ -140,19 +140,18 @@ dfm['EX_SUM'] = dfm['EX_WIND'] + dfm['EX_SNWD'] +dfm['EX_TMAX'] + dfm['EX_TMIN']
 
 dfm2 = dfm[['total_days', 'EX_SUM', 'EX_WIND',  'EX_SNWD', 'EX_TMAX', 'EX_TMIN']]
 
+
+
 #step 24
 print(dfm2.corr())
 
 
-#
+
+
 #To find the number of sewer back up complaints for each year:
 
 
-#dfm.loc[dfm['open_date'].str.contains('2017'), 'year'] = 2017
-#dfm.loc[dfm['open_date'].str.contains('2018'), 'year'] = 2018
-#dfm.loc[dfm['open_date'].str.contains('2019'), 'year'] = 2019
-#dfm['year'] = dfm['year'].astype(int)
-#print(dfm['year'].astype(int).value_counts())
+
 
 # To find the average time that it takes  DPW to address a complaint:
 #print(dfm['total_days'].mean())

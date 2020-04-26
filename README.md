@@ -4,12 +4,27 @@
 This project provides an analysis and evaluation of the impact of extreme weather on the time (The time between opening date and closing date of a complaint about **Sewer Back up** problem) to complete a 'Sewer Back up' problem in the City of Syracuse, New York.  The initial assumption is that the time to complete a sewer back up service request is delayed by extreme weather. In this Project, first I performed a data preparation process which include data cleaning, merging and  creating   new variables and dropping duplicates.  Second, after getting the final sample data ready, I tried to find the correlation between the completion time of request for sewer back up service (total_day) and extreme weather variables-if there is positive correlation between extreme weather's variables and completion time of addressing the sewer back up problem, means that the initial assumption is true  and extreme weather  delays the completion time of addressing sewer back up complaint. If the correlation is negative, means that the initial assumption is not true  and extreme weather in Syracuse doesn't delay the completion time of addressing sewer back up complaint. Finally, it should be
 mentioned that creating extreme variable is based on my personal assumption because there is no any specific definition or criteria for extreme weather.
 
-## Input data
+## Related questions
+
+Which zip code recoded the highest number of request for fixing sewer back up problem?
+
+Which zip code recoded the lowest request?
+
+Totally, how many complaints  about sewer back up problem recorded during three years?
+
+How many complaints recorded for each year?
+
+What is the average time that DPW can address a complaint?
+
+What is the correlation between extreme weather variables and the completion time of addressing sewer back up complaint ('total_days')? Does extreme  weather delay the completion time of fixing a sewer back up problem?
+
+
+## Input data:
 
 Two datasets have been used in this study: the first one is 'Cityline_Call_for_Services' (Published on October 29, 2019) that is publicly available in Syracuse Open Source data's website(http://data.syrgov.net/datasets/0aa5fcd76dbd4f2cabf2aeb1ddd0179e_0/data). the cityline dataset has 2021 rows and 22 columns.  The second dataset is weather dataset 'Daily_Weather_Syracuse_17to19.csv' which is available in NCEI website (https://www.ncdc.noaa.gov/cdo-web/search). The dataset contain 911 rows and 25 columns.  Both datasets contain data from 2017, 2018 and 2019.
 
-### Deliverables
-Three deliverable files include one README.md file that explain the project step by step, one relult.md file that briefly discuss on the findings and one python script  that is called 'final_project.py',  contains code used in this project.  The datasets used in this project also uploaded along  other deliverables.
+### Deliverables:
+Three deliverable files include one README.md file that explain the project step by step, one result.md file that briefly discuss on the findings and one python script  that is called 'final_project.py',  contains code used in this project.  The datasets used in this project also uploaded along  other deliverables.
 
 #### Instruction:
 
@@ -84,18 +99,3 @@ all extreme variables
 which  is the lenght of time to address a complaint about sewer back up problem, create a subset of dfm (merged dataset) that just contain extreme variables and 'total-days'. Call the subset of dfm, dfm2.
 
 24. Now, apply  pandas.DataFrame.corr method to dfm2 and print it.
-
-
-### Related questions
-
-What is the correlation between extreme weather variables and the completion time of addressing sewer back up complaint ('total_days')? Does extreme  weather delay the completion time of fixing a sewer back up problem?
-
-Which zip code recoded the highest number of request for fixing sewer back up problem?
-
-Which zip code recoded the lowest request?
-
-Totally, how many complaints  about sewer back up problem recorded during three years?
-
-How many complaints recorded for each year?
-
-What is the average time that DPW can address a complaint?
